@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Articles by Gabriel Sarmento - Compendium</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="">Home</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li class="active"><a href="/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="">Compendium</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="content">
+<h2>Articles by Gabriel Sarmento</h2>
+
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="/python-testings-with-pytest.html" rel="bookmark" title="Permalink to Python testings with pytest">Python testings with pytest</a></h2> </header>
+                <div class="entry-content"> <h2>Stack:</h2>
+<ul>
+<li>Python3.6+</li>
+<li>Pytest</li>
+</ul>
+<h2>Casos de testes:</h2>
+<h3>Métodos simples:</h3>
+<h4>Implementação:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">helper</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+    <span class="s1">&#39;field_1&#39;</span><span class="p">:</span> <span class="s1">&#39;value_1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;field_2&#39;</span><span class="p">:</span> <span class="s1">&#39;value_2&#39;</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<h4>Validação de tipo:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_should_return_a_dict</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Validação de chaves:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_should_return_expected_keys</span><span class="p">():</span>
+    <span class="n">expected_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field_1&#39;</span><span class="p">,</span> <span class="s1">&#39;field_2&#39;</span><span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="n">expected_keys</span>
+</code></pre></div>
+
+<h4>validação de valores:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark …</span></code></pre></div> </div><!-- entry-content -->
+        </article>
+</section><!-- content -->
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="">Compendium</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

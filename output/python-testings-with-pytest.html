@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Python testings with pytest - Compendium</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="">Home</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="">Compendium</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="/python-testings-with-pytest.html" rel="bookmark"
+         title="Permalink to Python testings with pytest">Python testings with pytest</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h2>Stack:</h2>
+<ul>
+<li>Python3.6+</li>
+<li>Pytest</li>
+</ul>
+<h2>Casos de testes:</h2>
+<h3>Métodos simples:</h3>
+<h4>Implementação:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">helper</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+    <span class="s1">&#39;field_1&#39;</span><span class="p">:</span> <span class="s1">&#39;value_1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;field_2&#39;</span><span class="p">:</span> <span class="s1">&#39;value_2&#39;</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<h4>Validação de tipo:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_should_return_a_dict</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Validação de chaves:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_should_return_expected_keys</span><span class="p">():</span>
+    <span class="n">expected_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field_1&#39;</span><span class="p">,</span> <span class="s1">&#39;field_2&#39;</span><span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="n">expected_keys</span>
+</code></pre></div>
+
+<h4>validação de valores:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;field_1&#39;</span><span class="p">,</span> <span class="s1">&#39;value_1&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;field_2&#39;</span><span class="p">,</span> <span class="s1">&#39;value_2&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_should_return_expected_values</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span>
+</code></pre></div>
+
+<h3>Métodos que chamam outros métodos:</h3>
+<h4>Implementação:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">helper</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">get_something</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<h4>Validação da chamada de método aninhado:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;app.get_something&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_should_call_get_something_method</span><span class="p">(</span><span class="n">mocked_method</span><span class="p">):</span>
+    <span class="n">helper</span><span class="p">()</span>
+
+    <span class="n">mocked_method</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>Validação de retorno de método aninhado:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;app.get_something&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_should_return_get_something_method_return</span><span class="p">(</span><span class="n">mocked_method</span><span class="p">):</span>
+    <span class="n">mocked_method</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s1">&#39;expected_value&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">helper</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s1">&#39;expected_value&#39;</span>
+</code></pre></div>
+
+<h3>Chamadas de métodos com parâmetros:</h3>
+<h4>Implementação:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">helper</span><span class="p">():</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s1">&#39;xpto&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Validação da chamada de um método com os parâmetros esperados:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;app.do_something&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_should_call_do_somethig_method_with_expected_params</span><span class="p">(</span><span class="n">mocked_method</span><span class="p">):</span>
+    <span class="n">helper</span><span class="p">()</span>
+
+    <span class="n">mocked_method</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s1">&#39;xpto&#39;</span><span class="p">)</span>
+</code></pre></div>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2022-10-02T14:23:00-03:00">
+      dom 02 outubro 2022
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="/author/gabriel-sarmento.html">Gabriel Sarmento</a>
+    </address> in <a href="/category/python.html">Python</a> Tagged <a href="/tag/python-tests.html">Python Tests </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="">Compendium</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
