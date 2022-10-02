@@ -12,6 +12,8 @@ docutils==0.19
     # via pelican
 feedgenerator==2.0.0
     # via pelican
+ghp-import==2.1.0
+    # via -r requirements.in
 jinja2==3.1.2
     # via pelican
 markdown==3.4.1
@@ -25,7 +27,9 @@ pygments==2.13.0
     #   pelican
     #   rich
 python-dateutil==2.8.2
-    # via pelican
+    # via
+    #   ghp-import
+    #   pelican
 pytz==2022.4
     # via
     #   feedgenerator
